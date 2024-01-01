@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>wang.bannong</groupId>
+    <artifactId>paxos-boot</artifactId>
+    <name>${project.artifactId}</name>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+    <url>https://bannong.wang</url>
+
+    <properties>
+    </properties>
+
+    <dependencies>
+    </dependencies>
+
+    <modules>
+        <module>paxos-boot-cache</module>
+        <module>paxos-boot-datasource</module>
+        <module>paxos-boot-log</module>
+        <module>paxos-boot-mybatis</module>
+        <module>paxos-boot-redis</module>
+        <module>paxos-boot-security</module>
+        <module>paxos-boot-swagger</module>
+        <module>paxos-boot-web</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <finalName>${project.name}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+</project>
