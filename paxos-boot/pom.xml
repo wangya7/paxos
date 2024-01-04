@@ -21,6 +21,7 @@
         <module>paxos-boot-datasource</module>
         <module>paxos-boot-log</module>
         <module>paxos-boot-mybatis</module>
+        <module>paxos-boot-nacos</module>
         <module>paxos-boot-redis</module>
         <module>paxos-boot-security</module>
         <module>paxos-boot-swagger</module>
