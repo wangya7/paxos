@@ -9,3 +9,11 @@
 #### 设计原则
 1. 代码质量把控好，接受大家的指正；
 2. 尽量控制依赖，减少没有必要的依赖，依赖成熟的项目；
+
+### 时间线
+
+### 技术栈
+* Spring,Spring Boot,Spring Cloud
+* Mybatis
+* Redis
+* MySQL
