@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>wang.bannong</groupId>
+  <artifactId>paxos-boot-nacos</artifactId>
+  <name>${project.artifactId}</name>
+  <version>1.0.0</version>
+  <packaging>jar</packaging>
+  <url>https://bannong.wang</url>
+
+  <properties>
+    <jasypt.version>3.0.5</jasypt.version>
+    <jaxb.version>2.3.5</jaxb.version>
+
+    <nacos.version>2.2.4-OEM</nacos.version>
+    <spring-boot-dependencies.version>2.7.16</spring-boot-dependencies.version>
+    <spring-cloud.version>2022.0.4</spring-cloud.version>
+    <spring-boot-admin.version>2.7.11</spring-boot-admin.version>
+  </properties>
+
+  <dependencies>
+    <!--配置文件处理器-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+    <!--配置文件加解密-->
+    <dependency>
+      <groupId>com.github.ulisesbocchio</groupId>
+      <artifactId>jasypt-spring-boot-starter</artifactId>
+      <version>${jasypt.version}</version>
+    </dependency>
+
+    <!--监控-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <!--监控客户端-->
+    <dependency>
+      <groupId>de.codecentric</groupId>
+      <artifactId>spring-boot-admin-starter-client</artifactId>
+      <version>${spring-boot-admin.version}</version>
+    </dependency>
+    <!--Lombok-->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <scope>provided</scope>
+      <version>1.18.30</version>
+    </dependency>
+    <!-- JAVA 17 -->
+    <dependency>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-impl</artifactId>
+      <version>${jaxb.version}</version>
+    </dependency>
+    <!--测试依赖-->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+
+    <dependency>
+      <groupId>io.springboot.nacos</groupId>
+      <artifactId>nacos-config</artifactId>
+      <version>${nacos.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.tomcat.embed</groupId>
+      <artifactId>tomcat-embed-jasper</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>io.springboot.nacos</groupId>
+      <artifactId>nacos-naming</artifactId>
+      <version>${nacos.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.springboot.nacos</groupId>
+      <artifactId>nacos-istio</artifactId>
+      <version>${nacos.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.springboot.nacos</groupId>
+      <artifactId>nacos-plugin-default-impl</artifactId>
+      <version>${nacos.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.springboot.nacos</groupId>
+      <artifactId>nacos-prometheus</artifactId>
+      <version>${nacos.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-system</artifactId>
+      <version>5.8.22</version>
+    </dependency>
+  </dependencies>
+
+
+  <!--依赖版本声明-->
+  <dependencyManagement>
+    <dependencies>
+      <!-- SpringBoot 依赖配置 -->
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot-dependencies.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- SpringCloud 微服务 -->
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <!-- SpringBoot Admin -->
+      <dependency>
+        <groupId>de.codecentric</groupId>
+        <artifactId>spring-boot-admin-starter-server</artifactId>
+        <version>${spring-boot-admin.version}</version>
+      </dependency>
+
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+            <configuration>
+              <loaderImplementation>CLASSIC</loaderImplementation>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>io.fabric8</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+        <excludes>
+          <exclude>**/*.woff</exclude>
+          <exclude>**/*.woff2</exclude>
+          <exclude>**/*.ttf</exclude>
+          <exclude>**/*.eot</exclude>
+        </excludes>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>false</filtering>
+        <includes>
+          <include>**/*.woff</include>
+          <include>**/*.woff2</include>
+          <include>**/*.ttf</include>
+          <include>**/*.eot</include>
+        </includes>
+      </resource>
+    </resources>
+  </build>
+</project>
